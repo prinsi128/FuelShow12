@@ -4,8 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
-public class DataBaseHelper {
+public class DataBaseHelper extends SQLiteOpenHelper {
     public DataBaseHelper(Context context) {
         super(context, "Userdata.db",null,1);
     }
@@ -58,8 +59,7 @@ public class DataBaseHelper {
 
     }
 
-    private SQLiteDatabase getWritableDatabase() {
-    }
+
 }
 
 

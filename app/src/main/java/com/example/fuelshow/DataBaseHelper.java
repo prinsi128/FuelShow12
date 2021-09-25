@@ -27,7 +27,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase mydb = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("name",fullname);
+        contentValues.put("",fullname);
         contentValues.put("phone",phonenum);
         contentValues.put("did",driverid);
         long result = mydb.insert("DriverInfo",null,contentValues);

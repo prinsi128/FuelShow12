@@ -14,49 +14,49 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase mydb) {
         mydb.execSQL("create Table DriverInfo(fullname TEXT,phonenum TEXT,driverid TEXT primary key )");
-        mydb.execSQL("create Table Average(date TEXT,time TEXT,did1 TEXT,codometer Text,lodometer TEXT,priceperl TEXT,totalcost TEXT,liter TEXT,average TEXT)");
+        mydb.execSQL("create Table Efficiency(date TEXT,time TEXT,proflit TEXT, fuel Text,km TEXT,price TEXT,avgfuel TEXT,avgwithineco TEXT, dprice TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase mydb, int i, int i1) {
         mydb.execSQL("drop Table if exists DriverInfo");
-        mydb.execSQL("drop Table if exists Average");
+        mydb.execSQL("drop Table if exists Efficiency");
     }
 
     public Boolean insertuserdata(String fullname, String phonenum, String driverid){
 
         SQLiteDatabase mydb = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("fullname",fullname);
-        contentValues.put("phone",phonenum);
-        contentValues.put("did",driverid);
-        long result = mydb.insert("DriverInfo",null,contentValues);
+        ContentValues cv = new ContentValues();
+        cv.put("fullname",fullname);
+        cv.put("phonenum",phonenum);
+        cv.put("driverid",driverid);
+        long result = mydb.insert("DriverInfo",null,cv);
         return result != -1;
     }
 
-    public Boolean averagedata(String date, String time, String did1, String codometer, String lodometer,String priceperl,String totalcost,String liter,String average){
-
-        SQLiteDatabase mydb=this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("date",date);
-        contentValues.put("time",time);
-        contentValues.put("did1",did1);
-        contentValues.put("codometer",codometer);
-        contentValues.put("lodometer",lodometer);
-        contentValues.put("priceperl",priceperl);
-        contentValues.put("totalcost",totalcost);
-        contentValues.put("liter",liter);
-        contentValues.put("average",average);
-        long result = mydb.insert("Average",null,contentValues);
-        return result != -1;
-    }
-
-
-    public Cursor getdata()
+    public Boolean averagedata(String date, String time, String proflit , String fuel, String km,String price,String avgfuel,String avgwithineco,String dprice)
     {
         SQLiteDatabase mydb=this.getWritableDatabase();
-        return mydb.rawQuery("Select * from Userdetails", null);
+        ContentValues cv = new ContentValues();
+        cv.put("date",date);
+        cv.put("time",time);
+        cv.put("proflit",proflit);
+        cv.put("fuel",fuel);
+        cv.put("km",km);
+        cv.put("price",price);
+        cv.put("avgfuel",avgfuel);
+        cv.put("avgwithineco",avgwithineco);
+        cv.put("dprice",dprice);
+        long result = mydb.insert("Efficiency",null,cv);
+        return result != -1;
+    }
 
+
+    public Cursor getalldata()
+    {
+        SQLiteDatabase mydb=this.getWritableDatabase();
+        Cursor cursor =  mydb.rawQuery("Select * from Userdetails", null);
+        return cursor;
     }
 
 
